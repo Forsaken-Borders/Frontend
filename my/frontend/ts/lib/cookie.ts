@@ -9,7 +9,7 @@ class Cookie {
     }
 
     public static Set(name: string, content: any, hoursTilExpire: number): void {
-        document.cookie += `${name.trim()}=${encodeURIComponent(content)};max-age=${hoursTilExpire * 60 * 60}; path=/;domain=my.forsaken-borders.net;secure`;
+        document.cookie += `${name.trim()}=${encodeURIComponent(content)};max-age=${new Date(Date.now() + hoursTilExpire * 60 * 60).toUTCString()}; path=/;domain=my.forsaken-borders.net;secure`;
     }
 
     public static Update(name: string, content: any, hoursTilExpire: number): void {
@@ -17,7 +17,7 @@ class Cookie {
         for (let i: number = 0; i < cookies.length; i++) {
             let cookieContent = cookies[i].split('=');
             if (cookieContent[0].toLowerCase() == name.toLowerCase()) {
-                cookies[i] = `${name.trim()}=${encodeURIComponent(content)};max-age=${hoursTilExpire * 60 * 60};path=/;domain=my.forsaken-borders.net;secure`;
+                cookies[i] = `${name.trim()}=${encodeURIComponent(content)};max-age=${new Date(Date.now() + hoursTilExpire * 60 * 60).toUTCString()};path=/;domain=my.forsaken-borders.net;secure`;
                 break;
             }
         }
